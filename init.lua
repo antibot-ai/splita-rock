@@ -11,8 +11,14 @@ local function splita(str, sep, opts)
   local ret = {}
 
   for part in string.gmatch(str, '[^'..sep..']+') do
-    if opts.uppercase then
+    if opts.trim then
+      part = part:gsub('^%s+', ''):gsub('%s+$', '')
+    end
+
+    if opts.upper then
       part = string.upper(part)
+    elseif opts.lower then
+      part = string.lower(part)
     end
 
     ret[part] = part
